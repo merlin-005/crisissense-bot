@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emergency Chatbot</title>
+</head>
+<body>
+
+<h2>Emergency Chatbot</h2>
+
+<input id="msg" placeholder="Ask emergency question">
+<button onclick="send()">Send</button>
+
+<p id="reply"></p>
+
+<script>
+function send(){
+  fetch("/chat",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({message:msg.value})
+  })
+  .then(r=>r.json())
+  .then(d=>reply.innerText=d.reply)
+}
+</script>
+
+</body>
+</html>
